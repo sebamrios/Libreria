@@ -11,7 +11,7 @@ class Libros:
 #metodos
     def __init__(self):
         self.L=[]
-        self.ListaL=[]
+        self.ListaL=[]    #Vector de libros que me permite escribir en un archivo los libros existentes
 
     def ingresarLibro(self):
         print
@@ -29,7 +29,7 @@ class Libros:
         self.L.append(self.precio)
         self.L.append(self.anio)
 
-    def guardarLibro(self):
+    def guardarLibro(self):                 #Metodo que me permite crear y escribir un archivo .txt para ir guardando los libros
         archivo=open("/libros.txt","a")
         archivo.write(self.L[0])
         archivo.write(",")
@@ -40,7 +40,7 @@ class Libros:
         archivo.write(self.L[3])
         archivo.write("\n")
 
-    def listarLibros(self):
+    def listarLibros(self):                 #Vector de libros que me permite escribir en un archivo los libros existentes
         archivo=open("/Libros.txt","r")
         for linea in archivo.readlines():
             print linea
