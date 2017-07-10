@@ -2,7 +2,7 @@
 from Libro import Libros
 from Sucursal import Sucursales
 from Venta import Ventas
-from Interface import Menues
+from interface import Menues
 #----------------Instancias de Clases y declaraciones de variables--------------
 m=Menues()
 v=Ventas()
@@ -17,25 +17,28 @@ ConjLibros=[] #conjunto de libros que hay en totalVentas
 ConjSucursales=[]
 ConjLibrosVendidos=[]
 
+
 #------------------------------------INICIO-------------------------------------
 while bucle in respuestaSi:
     m.menuGral()
-    respMenuGral="s"
-    respMenuLibro="s"
-    respMenuSucursal="s"
-    respMenuVentas="s"
-    respCargaLibros="s"
+    respMenuGral=respuestaSi[0]
+    respMenuLibro=respuestaSi[0]
+    respMenuSucursal=respuestaSi[0]
+    respMenuVentas=respuestaSi[0]
+    respCargaLibros=respuestaSi[0]
     o=""
     o=raw_input("Ingrese una de las opciones:\n")# opcion ingresada
 
+    #while o in opciones:
     while not o in opciones:
         o=raw_input("Ingrese un valor valido,por favor\n")
     while o in opciones:
-        if o=="1" :#---------------------LIBROS-------------------------------------
+        if o=="1"  :#---------------------LIBROS------------------------------------
             m.menuLibro()
             while respMenuLibro in respuestaSi:
                 e.ingresarLibro()
                 e.cargarLibro()
+                e.guardarLibro()
                 e.mostrarLibro()
                 ConjLibros.append(e.L)
                 e.limpiarLibro()
@@ -49,6 +52,7 @@ while bucle in respuestaSi:
                 s.ingresarSucursal()
                 s.cargarSucursal()
                 s.mostrarSucursal()
+                s.guardarSucursal()
                 ConjSucursales.append(s.S)
                 s.limpiarSucursal()
                 respMenuSucursal=raw_input("\nDesea seguir cargando sucursales? s/n\n")
@@ -63,17 +67,16 @@ while bucle in respuestaSi:
                 respCargaLibros="s"
                 del ConjLibrosVendidos
                 ConjLibrosVendidos=[]
-
                 m.msjVentasListaSucursales()
-                for i in range(len(ConjSucursales)):
-                    print (str(i+1)+ ")" + str(ConjSucursales[i]))
+                s.listarSucursales()
+                ConjSucursales=s.devolverListaSucursales()
                 j=int(raw_input("\nIngrese la sucursal a eleccion,por favor\n"))
                 j=ConjSucursales[j-1]
 
                 while respCargaLibros in respuestaSi:
                     m.msjVentasListaLibros()
-                    for i in range(len(ConjLibros)):
-                        print ( str(i+1) + ")" + str(ConjLibros[i]))
+                    e.listarLibros()
+                    ConjLibros=e.devolverListaLibros()
                     k=int(raw_input("\nIngrese un libro a comprar,por favor?\n"))
                     k=ConjLibros[k-1]
                     ConjLibrosVendidos.append(k)
@@ -95,4 +98,4 @@ while bucle in respuestaSi:
     while not bucle in respuesta:
         bucle=raw_input("Ingrese un valor valido,por favor\n")
 m.menuFin()
-print("---------------------------FIN---------------------------------")
+print("---------------------------------------------------------------")

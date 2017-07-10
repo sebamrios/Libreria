@@ -11,7 +11,7 @@ class Libros:
 #metodos
     def __init__(self):
         self.L=[]
-        return
+        self.ListaL=[]
 
     def ingresarLibro(self):
         print
@@ -21,7 +21,6 @@ class Libros:
         self.precio=raw_input("Ingrese el precio:\n")
         self.color=raw_input("Ingrese el color:\n")
         self.anio=raw_input("Ingrese el anio:\n")
-        return
 
     def cargarLibro(self):
         self.L.append(self.titulo)
@@ -29,10 +28,29 @@ class Libros:
         self.L.append(self.color)
         self.L.append(self.precio)
         self.L.append(self.anio)
-        return
+
+    def guardarLibro(self):
+        archivo=open("/libros.txt","a")
+        archivo.write(self.L[0])
+        archivo.write(",")
+        archivo.write(self.L[1])
+        archivo.write(",")
+        archivo.write(self.L[2])
+        archivo.write(",")
+        archivo.write(self.L[3])
+        archivo.write("\n")
+
+    def listarLibros(self):
+        archivo=open("/Libros.txt","r")
+        for linea in archivo.readlines():
+            print linea
+            self.ListaL.append(linea)
+        archivo.close()
+
+    def devolverListaLibros(self):
+        return (self.ListaL)
 
     def mostrarLibro(self):
-
         print('\t'*2 + "Titulo: " + str(self.L[0]))
         print('\t'*2 + "Autor:  " + str(self.L[1]))
         print('\t'*2 + "color:  " + str(self.L[2]))
@@ -40,10 +58,7 @@ class Libros:
         print('\t'*2 + "precio: " + str(self.L[4]))
         print
         print
-        return
 
     def limpiarLibro(self):
-
         del self.L
         self.L=[]
-        return
